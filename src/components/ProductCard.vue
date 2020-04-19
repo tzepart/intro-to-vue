@@ -124,4 +124,4 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style src="./product-card.css"></style>
+<style src="../assets/styles/product-card.css"></style>
