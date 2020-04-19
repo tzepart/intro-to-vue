@@ -20,8 +20,8 @@
 </template>
 
 <script>
-    import ProductAddReview from './ProductAddReview.vue'
-    import ProductReviews from './ProductReviews.vue'
+    import ProductAddReview from "./ProductAddReview.vue"
+    import ProductReviews from "./ProductReviews.vue"
 
     export default {
         name: "ProductTabs",
@@ -31,8 +31,8 @@
         },
         data() {
             return {
-                tabs: ['Reviews', 'Make a Review'],
-                selectedTab: 'Reviews',
+                tabs: ["Reviews", "Make a Review"],
+                selectedTab: "Reviews",
                 reviews: []
             }
         },
