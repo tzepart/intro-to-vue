@@ -5,6 +5,7 @@
         </div>
 
         <div class="product-info">
+            <h2>{{ msg }}</h2>
             <h1>{{ title }}</h1>
             <div v-show="isProductShow">
                 <p v-if="availableCount>10">In Stock</p>
@@ -37,17 +38,37 @@
                 </button>
             </div>
         </div>
+        <div>
+            <p v-if="!reviews.length">There are no reviews yet.</p>
+            <ul v-else>
+                <li v-for="(review, index) in reviews" :key="index">
+                    <p>{{ review.name }}</p>
+                    <p>Rating:{{ review.rating }}</p>
+                    <p>{{ review.review }}</p>
+                </li>
+            </ul>
+        </div>
+        <ProductReview @review-submitted="addReview"></ProductReview>
     </div>
 </template>
 
 <script>
+    import ProductReview from './ProductReview.vue'
+
     export default {
         name: "ProductCard",
         props: {
             premium: {
                 type: Boolean,
                 required: true
+            },
+            msg: {
+                type: String,
+                required: false
             }
+        },
+        components: {
+            ProductReview
         },
         data: function () {
             return {
@@ -74,7 +95,8 @@
                         itemQuantity: 2
                     }
                 ],
-                inCart: 0
+                inCart: 0,
+                reviews: []
             };
         },
         methods: {
@@ -84,6 +106,9 @@
             },
             updateProduct: function (index) {
                 this.selectedVariant = index
+            },
+            addReview(productReview) {
+                this.reviews.push(productReview)
             }
         },
         computed: {
