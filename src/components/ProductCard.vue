@@ -1,7 +1,7 @@
 <template>
     <div class="product">
         <div class="product-image">
-            <img v-bind:src="image" :alt="product"/>
+            <img v-bind:src="productImage" :alt="product"/>
         </div>
 
         <div class="product-info">
@@ -15,7 +15,7 @@
                 <p>Shipping: {{ shipping }}</p>
 
                 <ul>
-                    <li v-for="detail in details" :key="detail.material">
+                    <li v-for="(detail, index) in details" :key="index">
                         {{ detail.material }},
                         {{ detail.add_material }},
                         {{ detail.type }}
@@ -38,22 +38,12 @@
                 </button>
             </div>
         </div>
-        <div>
-            <p v-if="!reviews.length">There are no reviews yet.</p>
-            <ul v-else>
-                <li v-for="(review, index) in reviews" :key="index">
-                    <p>{{ review.name }}</p>
-                    <p>Rating:{{ review.rating }}</p>
-                    <p>{{ review.review }}</p>
-                </li>
-            </ul>
-        </div>
-        <ProductReview @review-submitted="addReview"></ProductReview>
+        <ProductTabs></ProductTabs>
     </div>
 </template>
 
 <script>
-    import ProductReview from './ProductReview.vue'
+    import ProductTabs from './ProductTabs.vue'
 
     export default {
         name: "ProductCard",
@@ -68,7 +58,7 @@
             }
         },
         components: {
-            ProductReview
+            ProductTabs
         },
         data: function () {
             return {
@@ -95,8 +85,7 @@
                         itemQuantity: 2
                     }
                 ],
-                inCart: 0,
-                reviews: []
+                inCart: 0
             };
         },
         methods: {
@@ -106,16 +95,13 @@
             },
             updateProduct: function (index) {
                 this.selectedVariant = index
-            },
-            addReview(productReview) {
-                this.reviews.push(productReview)
             }
         },
         computed: {
             title() {
                 return this.brand + ' ' + this.product
             },
-            image() {
+            productImage() {
                 return this.items[this.selectedVariant].itemImage
             },
             availableCount() {
@@ -138,4 +124,4 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style src="./product_card.css"></style>
+<style src="./product-card.css"></style>
