@@ -44,14 +44,11 @@
 
 <script>
     import ProductTabs from "../components/ProductTabs.vue"
+    import {EventBus} from './../main'
 
     export default {
         name: "ProductCard",
         props: {
-            premium: {
-                type: Boolean,
-                required: true
-            },
             msg: {
                 type: String,
                 required: false
@@ -66,6 +63,7 @@
                 brand: "Sunny bunny",
                 isProductShow: true,
                 selectedVariant: 0,
+                premium: false,
                 details: [{
                     "material": "Cotton",
                     "add_material": "Smth else",
@@ -91,7 +89,7 @@
         methods: {
             addToCart() {
                 this.items[this.selectedVariant].itemQuantity -= 1;
-                this.$emit("add-to-cart", this.items[this.selectedVariant].itemId);
+                EventBus.$emit("add-to-cart", this.items[this.selectedVariant].itemId);
             },
             updateProduct: function (index) {
                 this.selectedVariant = index
