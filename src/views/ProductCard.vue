@@ -43,7 +43,7 @@
 </template>
 
 <script>
-    import ProductTabs from "./ProductTabs.vue"
+    import ProductTabs from "../components/ProductTabs.vue"
 
     export default {
         name: "ProductCard",
@@ -75,13 +75,13 @@
                     {
                         itemId: 224,
                         itemColor: "green",
-                        itemImage: require("./../assets/images/vmSocks-green-onWhite.jpg"),
+                        itemImage: require("../assets/images/vmSocks-green-onWhite.jpg"),
                         itemQuantity: 11
                     },
                     {
                         itemId: 225,
                         itemColor: "blue",
-                        itemImage: require("./../assets/images/vmSocks-blue-onWhite.jpg"),
+                        itemImage: require("../assets/images/vmSocks-blue-onWhite.jpg"),
                         itemQuantity: 2
                     }
                 ],

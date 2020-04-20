@@ -12,7 +12,7 @@
 </template>
 
 <script>
-    import ProductCard from "./components/ProductCard.vue"
+    import ProductCard from "./views/ProductCard.vue"
 
     export default {
         name: "App",
