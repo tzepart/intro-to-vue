@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import ProductList from '../views/ProductList.vue'
 import ProductCard from '../views/ProductCard.vue'
 import ProductCreate from '../views/ProductCreate.vue'
+import NotFound from '../views/NotFound.vue'
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,10 @@ const routes = [
         name: 'product-create',
         component: ProductCreate
     },
+    {
+        path: '*',
+        component: NotFound
+    }
 ];
 
 const router = new VueRouter({
