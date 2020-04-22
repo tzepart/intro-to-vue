@@ -7,6 +7,7 @@
         <div class="product-info">
             <h2>{{ msg }}</h2>
             <h1>{{ title }}</h1>
+            <h2>Code: {{ code }}</h2>
             <div v-show="isProductShow">
                 <p v-if="availableCount>10">In Stock</p>
                 <p v-else-if="availableCount<=10 && availableCount>0">Almost sold out!</p>
