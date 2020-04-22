@@ -14,9 +14,10 @@ const routes = [
         alias: '/'
     },
     {
-        path: '/product-card',
+        path: '/product-card/:code',
         name: 'product-card',
-        component: ProductCard
+        component: ProductCard,
+        props: true
     },
     {
         path: '/product-create',
@@ -26,6 +27,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
+    mode: 'history',
     routes
 });
 
