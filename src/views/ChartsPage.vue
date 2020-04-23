@@ -7,9 +7,9 @@
         </div>
         <div class="row">
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-primary" @click="appendData">+ADD</button>
-                <button type="button" class="btn btn-danger" @click="removeData">-REMOVE</button>
-                <button type="button" class="btn btn-warning" @click="randomize">RANDOMIZE</button>
+                <button type="button" class="btn btn-primary" @click="appendData">+ ADD</button>
+                <button type="button" class="btn btn-danger" @click="removeData">- RMV</button>
+                <button type="button" class="btn btn-warning" @click="randomize">RAND</button>
                 <button type="button" class="btn btn-info" @click="reset">RESET</button>
             </div>
         </div>
