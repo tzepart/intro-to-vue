@@ -20,6 +20,7 @@
                     :height="height"
                     :dataFormat="dataFormat"
                     :dataSource="dataSource"
+                    :events="events"
             >
             </fusioncharts>
         </div>
@@ -35,7 +36,15 @@
             subcaption:
                 "Click on the segments to Drill-down for ...",
             showplotborder: "2",
-            theme: "umber"
+            theme: "umber",
+            placeValuesInside: "0",
+            rotateValues: "0",
+            valueFont: "Arial",
+            valueFontColor: "#ffdddd",
+            valueFontSize: "8",
+            valueFontBold: "1",
+            valueFontItalic: "0",
+            valueFontAlpha: "90",
         },
         data: [
             {
@@ -104,7 +113,7 @@
             ],
             application: [
                 {
-                    toobject: "TOOLTIP",
+                    toobject: "DATAPLOT",
                     styles: "myHTMLFont"
                 }
             ]
@@ -119,20 +128,20 @@
         data() {
             return {
                 type: "sunburst",
-                width: "100%",
+                width: "50%",
                 height: "100%",
                 dataFormat: "json",
                 dataSource,
                 events: {
-                    dataPlotClick: function(ev, props) {
+                    dataPlotClick(ev, props) {
                         console.log(ev, props);
                     },
-                    dataPlotRollOver: function(e) {
+                    dataPlotRollOver(e) {
                         console.log(e);
                     },
-                    dataPlotRollOut: function(e) {
+                    dataPlotRollOut(e) {
                         console.log(e);
-                    }
+                    },
                 },
 
 
@@ -187,7 +196,7 @@
 
             reset: function () {
                 this.series = [44, 55, 13, 33]
-            }
+            },
         }
     }
 </script>
