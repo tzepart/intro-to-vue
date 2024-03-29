@@ -7,8 +7,8 @@
         <div class="product-info">
             <h1>{{ product }}</h1>
             <div v-show="isProductShow">
-                <p v-if="inventory>10">In Stock</p>
-                <p v-else-if="inventory<=10 && inventory>0">Almost sold out!</p>
+                <p v-if="availableCount>10">In Stock</p>
+                <p v-else-if="availableCount<=10 && availableCount>0">Almost sold out!</p>
                 <p v-else>Out of Stock</p>
 
                 <ul>
@@ -19,14 +19,23 @@
                     </li>
                 </ul>
 
-                <div v-for="variant in variants" :key="variant.variantId">
-                    <p @mouseover="updateProduct(variant.variantImage)">{{ variant.variantColor }}</p>
+                <div class="color-box"
+                     v-for="variant in variants"
+                     :key="variant.variantId"
+                     :style="{ backgroundColor: variant.variantColor }"
+                     @mouseover="updateProduct(variant.variantImage)"
+                >
                 </div>
 
-                <button @click="addToCart">Add to cart</button>
+                <button v-on:click="addToCart"
+                        :disabled="availableCount===0"
+                        :class="{ disabledButton: availableCount===0 }"
+                >
+                    Add to cart
+                </button>
 
                 <div class="cart">
-                    <p>Cart({{ cart }})</p>
+                    <p>Cart({{ inCart }})</p>
                 </div>
             </div>
         </div>
@@ -40,7 +49,7 @@
             return {
                 product: "Socks",
                 image: require("./../assets/images/vmSocks-green-onWhite.jpg"),
-                inventory: 5,
+                availableCount: 5,
                 isProductShow: true,
                 details: [{
                     "material": "Cotton",
@@ -49,25 +58,26 @@
                 }],
                 variants: [
                     {
-                        variantId: 2234,
+                        variantId: 224,
                         variantColor: 'green',
                         variantImage: require("./../assets/images/vmSocks-green-onWhite.jpg")
                     },
                     {
-                        variantId: 2235,
+                        variantId: 225,
                         variantColor: 'blue',
                         variantImage: require("./../assets/images/vmSocks-blue-onWhite.jpg")
                     }
                 ],
-                cart: 0
+                inCart: 0
             };
         },
         methods: {
             addToCart() {
-                this.cart += 1
+                this.availableCount -= 1;
+                this.inCart += 1;
             },
             updateProduct(variantImage) {
-                this.image = variantImage
+                this.image = variantImage;
             }
         }
     }
