@@ -5,11 +5,12 @@
         </div>
 
         <div class="product-info">
-            <h1>{{ product }}</h1>
+            <h1>{{ title }}</h1>
             <div v-show="isProductShow">
                 <p v-if="availableCount>10">In Stock</p>
                 <p v-else-if="availableCount<=10 && availableCount>0">Almost sold out!</p>
                 <p v-else>Out of Stock</p>
+                <p>{{ sale }}</p>
 
                 <ul>
                     <li v-for="detail in details" :key="detail.material">
@@ -20,10 +21,10 @@
                 </ul>
 
                 <div class="color-box"
-                     v-for="variant in variants"
-                     :key="variant.variantId"
-                     :style="{ backgroundColor: variant.variantColor }"
-                     @mouseover="updateProduct(variant.variantImage)"
+                     v-for="(item, index) in items"
+                     :key="item.itemId"
+                     :style="{ backgroundColor: item.itemColor }"
+                     @mouseover="updateProduct(index)"
                 >
                 </div>
 
@@ -48,24 +49,26 @@
         data: function () {
             return {
                 product: "Socks",
-                image: require("./../assets/images/vmSocks-green-onWhite.jpg"),
-                availableCount: 5,
+                brand: 'Sunny bunny',
                 isProductShow: true,
+                selectedVariant: 0,
                 details: [{
                     "material": "Cotton",
                     "add_material": "Smth elso",
                     "type": "Uni-sex",
                 }],
-                variants: [
+                items: [
                     {
-                        variantId: 224,
-                        variantColor: 'green',
-                        variantImage: require("./../assets/images/vmSocks-green-onWhite.jpg")
+                        itemId: 224,
+                        itemColor: 'green',
+                        itemImage: require("./../assets/images/vmSocks-green-onWhite.jpg"),
+                        itemQuantity: 11
                     },
                     {
-                        variantId: 225,
-                        variantColor: 'blue',
-                        variantImage: require("./../assets/images/vmSocks-blue-onWhite.jpg")
+                        itemId: 225,
+                        itemColor: 'blue',
+                        itemImage: require("./../assets/images/vmSocks-blue-onWhite.jpg"),
+                        itemQuantity: 2
                     }
                 ],
                 inCart: 0
@@ -73,11 +76,28 @@
         },
         methods: {
             addToCart() {
-                this.availableCount -= 1;
+                this.items[this.selectedVariant].itemQuantity -= 1;
                 this.inCart += 1;
             },
-            updateProduct(variantImage) {
-                this.image = variantImage;
+            updateProduct: function (index) {
+                this.selectedVariant = index
+            }
+        },
+        computed: {
+            title() {
+                return this.brand + ' ' + this.product
+            },
+            image() {
+                return this.items[this.selectedVariant].itemImage
+            },
+            availableCount() {
+                return this.items[this.selectedVariant].itemQuantity
+            },
+            sale() {
+                if (this.availableCount > 0) {
+                    return this.brand + ' ' + this.product + ' are on sale!'
+                }
+                return this.brand + ' ' + this.product + ' are not on sale'
             }
         }
     }
