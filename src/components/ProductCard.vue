@@ -11,6 +11,7 @@
                 <p v-else-if="availableCount<=10 && availableCount>0">Almost sold out!</p>
                 <p v-else>Out of Stock</p>
                 <p>{{ sale }}</p>
+                <p>Shipping: {{ shipping }}</p>
 
                 <ul>
                     <li v-for="detail in details" :key="detail.material">
@@ -34,10 +35,6 @@
                 >
                     Add to cart
                 </button>
-
-                <div class="cart">
-                    <p>Cart({{ inCart }})</p>
-                </div>
             </div>
         </div>
     </div>
@@ -46,6 +43,12 @@
 <script>
     export default {
         name: "ProductCard",
+        props: {
+            premium: {
+                type: Boolean,
+                required: true
+            }
+        },
         data: function () {
             return {
                 product: "Socks",
@@ -77,7 +80,7 @@
         methods: {
             addToCart() {
                 this.items[this.selectedVariant].itemQuantity -= 1;
-                this.inCart += 1;
+                this.$emit('add-to-cart', this.items[this.selectedVariant].itemId);
             },
             updateProduct: function (index) {
                 this.selectedVariant = index
@@ -98,6 +101,12 @@
                     return this.brand + ' ' + this.product + ' are on sale!'
                 }
                 return this.brand + ' ' + this.product + ' are not on sale'
+            },
+            shipping() {
+                if (this.premium) {
+                    return "Free"
+                }
+                return 2.99
             }
         }
     }
