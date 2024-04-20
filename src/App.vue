@@ -1,13 +1,13 @@
 <template>
     <div id="app">
+        <div class="cart">
+            <p>Cart({{ inCart.length }})</p>
+        </div>
         <ProductCard
                 :premium="premium"
                 @add-to-cart="updateCart"
                 msg="Welcome to Example App"
         />
-        <div class="cart">
-            <p>Cart({{ inCart.length }})</p>
-        </div>
     </div>
 </template>
 
