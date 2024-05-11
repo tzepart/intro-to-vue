@@ -43,7 +43,7 @@
 </template>
 
 <script>
-    import ProductTabs from './ProductTabs.vue'
+    import ProductTabs from "./ProductTabs.vue"
 
     export default {
         name: "ProductCard",
@@ -63,24 +63,24 @@
         data: function () {
             return {
                 product: "Socks",
-                brand: 'Sunny bunny',
+                brand: "Sunny bunny",
                 isProductShow: true,
                 selectedVariant: 0,
                 details: [{
                     "material": "Cotton",
-                    "add_material": "Smth elso",
+                    "add_material": "Smth else",
                     "type": "Uni-sex",
                 }],
                 items: [
                     {
                         itemId: 224,
-                        itemColor: 'green',
+                        itemColor: "green",
                         itemImage: require("./../assets/images/vmSocks-green-onWhite.jpg"),
                         itemQuantity: 11
                     },
                     {
                         itemId: 225,
-                        itemColor: 'blue',
+                        itemColor: "blue",
                         itemImage: require("./../assets/images/vmSocks-blue-onWhite.jpg"),
                         itemQuantity: 2
                     }
@@ -91,7 +91,7 @@
         methods: {
             addToCart() {
                 this.items[this.selectedVariant].itemQuantity -= 1;
-                this.$emit('add-to-cart', this.items[this.selectedVariant].itemId);
+                this.$emit("add-to-cart", this.items[this.selectedVariant].itemId);
             },
             updateProduct: function (index) {
                 this.selectedVariant = index
@@ -99,7 +99,7 @@
         },
         computed: {
             title() {
-                return this.brand + ' ' + this.product
+                return this.brand + " " + this.product
             },
             productImage() {
                 return this.items[this.selectedVariant].itemImage
@@ -109,9 +109,9 @@
             },
             sale() {
                 if (this.availableCount > 0) {
-                    return this.brand + ' ' + this.product + ' are on sale!'
+                    return this.brand + " " + this.product + " are on sale!"
                 }
-                return this.brand + ' ' + this.product + ' are not on sale'
+                return this.brand + " " + this.product + " are not on sale"
             },
             shipping() {
                 if (this.premium) {

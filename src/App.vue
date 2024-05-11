@@ -12,11 +12,11 @@
 </template>
 
 <script>
-    import ProductCard from './components/ProductCard.vue'
+    import ProductCard from "./components/ProductCard.vue"
 
     export default {
-        name: 'App',
-        data: function () {
+        name: "App",
+        data() {
             return {
                 premium: false,
                 inCart: []
