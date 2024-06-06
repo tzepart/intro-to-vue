@@ -1,8 +1,10 @@
 <template>
     <div id="app">
         <div id="nav">
-            <router-link :to="{ name: 'product-list' }">Product List</router-link> |
-            <router-link :to="{ name: 'product-card' }">Show Product #1</router-link> |
+            <router-link :to="{ name: 'product-list' }">Product List</router-link>
+            |
+            <router-link :to="{ name: 'product-card' }">Show Product #1</router-link>
+            |
             <router-link :to="{ name: 'product-create' }">Create Product</router-link>
             <div class="cart">
                 <p>Cart({{ inCart.length }})</p>
@@ -53,10 +55,12 @@
     #nav {
         padding: 30px;
     }
+
     #nav a {
         font-weight: bold;
         color: #2c3e50;
     }
+
     #nav a.router-link-exact-active {
         color: #42b983;
     }
