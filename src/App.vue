@@ -3,8 +3,6 @@
         <div id="nav">
             <router-link :to="{ name: 'product-list' }">Product List</router-link>
             |
-            <router-link :to="{ name: 'product-card' }">Show Product #1</router-link>
-            |
             <router-link :to="{ name: 'product-create' }">Create Product</router-link>
             <div class="cart">
                 <p>Cart({{ inCart.length }})</p>

@@ -52,6 +52,10 @@
             msg: {
                 type: String,
                 required: false
+            },
+            code: {
+                type: String,
+                required: true
             }
         },
         components: {
