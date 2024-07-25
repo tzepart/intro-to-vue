@@ -4,6 +4,7 @@ import ProductList from '../views/ProductList.vue'
 import ProductCard from '../views/ProductCard.vue'
 import ProductCreate from '../views/ProductCreate.vue'
 import NotFound from '../views/NotFound.vue'
+import ChartsPage from '../views/ChartsPage.vue'
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,11 @@ const routes = [
         path: '/product-create',
         name: 'product-create',
         component: ProductCreate
+    },
+    {
+        path: '/charts-page',
+        name: 'charts-page',
+        component: ChartsPage
     },
     {
         path: '*',
