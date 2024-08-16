@@ -1,15 +1,31 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="chart-wrap">
+            <div class="col-6 chart-wrap">
                 <apexcharts width="380" :options="chartOptions" :series="series"></apexcharts>
+            </div>
+            <div class="col-6">
+                <form>
+                    <div class="form-group">
+                        <label for="idPrice">Price</label>
+                        <input v-model="price" type="number" class="form-control" id="idPrice" placeholder="Price">
+                    </div>
+                    <div class="form-group">
+                        <label for="idFreeMonthMoney">Free Month Money</label>
+                        <input v-model="freeMonthMoney" type="number" class="form-control" id="idFreeMonthMoney"
+                               placeholder="Free Month Money">
+                    </div>
+                    <div class="form-group">
+                        <label for="idCountMonth">Count Month</label>
+                        <input v-model="countMonth" type="number" class="form-control" id="idCountMonth"
+                               placeholder="Count Month">
+                    </div>
+                </form>
             </div>
         </div>
         <div class="row">
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-primary" @click="appendData">+ ADD</button>
-                <button type="button" class="btn btn-danger" @click="removeData">- RMV</button>
-                <button type="button" class="btn btn-warning" @click="randomize">RAND</button>
+                <button type="button" class="btn btn-primary" @click="calculate">CALCULATE</button>
                 <button type="button" class="btn btn-info" @click="reset">RESET</button>
             </div>
         </div>
@@ -26,15 +42,19 @@
         },
         data() {
             return {
-                series: [44, 55, 13, 33],
+                price: null,
+                freeMonthMoney: null,
+                countMonth: null,
+                series: [10, 90],
                 chartOptions: {
                     chart: {
                         width: 380,
                         type: 'donut',
                     },
-                    dataLabels: {
-                        enabled: false
-                    },
+                    // dataLabels: {
+                    //     enabled: false
+                    // },
+                    labels: ['Your Money', 'Remaining Amount'],
                     responsive: [{
                         breakpoint: 480,
                         options: {
@@ -55,31 +75,24 @@
             }
         },
         methods: {
-            appendData: function () {
-                var arr = this.series.slice();
-                arr.push(Math.floor(Math.random() * (100 - 1 + 1)) + 1);
-                this.series = arr
+            calculate: function () {
+                const price = Math.floor(this.price);
+                const freeMonthMoney = Math.floor(this.freeMonthMoney);
+                const countMonth = Math.floor(this.countMonth);
+                const sector1 = 100 * ((freeMonthMoney * countMonth) / price);
+                const sector2 = 100 - sector1;
+                this.series = [sector1, sector2];
             },
-
-            removeData: function () {
-                if (this.series.length === 1) return;
-                var arr = this.series.slice();
-                arr.pop();
-                this.series = arr
-            },
-
-            randomize: function () {
-                this.series = this.series.map(function () {
-                    return Math.floor(Math.random() * (100 - 1 + 1)) + 1
-                })
-            },
-
             reset: function () {
-                this.series = [44, 55, 13, 33]
+                this.series = [10, 90]
             }
         }
     }
 </script>
-<style scoped>
 
+<style scoped>
+    button {
+        margin: 10px;
+        width: auto;
+    }
 </style>
