@@ -17,8 +17,11 @@
                     </div>
                     <div class="form-group">
                         <label for="idCountMonth">Count Month</label>
-                        <input v-model="countMonth" type="number" class="form-control" id="idCountMonth"
-                               placeholder="Count Month">
+                        <select v-model="countMonth" class="form-control" id="idCountMonth">
+                            <option v-for="(monthNumber, index) in monthNumbers" v-bind:key="index">
+                                {{monthNumber}}
+                            </option>
+                        </select>
                     </div>
                 </form>
             </div>
@@ -85,6 +88,15 @@
             },
             reset: function () {
                 this.series = [10, 90]
+            }
+        },
+        computed: {
+            monthNumbers() {
+                const values = [];
+                for (let i = 1; i <= 24; i++) {
+                    values.push(i);
+                }
+                return values;
             }
         }
     }
