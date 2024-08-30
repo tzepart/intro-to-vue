@@ -10,6 +10,12 @@
                 <router-link class="p-2 text-dark" :to="{ name: 'product-create' }">
                     Create Product
                 </router-link>
+                <router-link class="p-2 text-dark" :to="{ name: 'charts-page' }">
+                    Charts Examples
+                </router-link>
+                <router-link class="p-2 text-dark" :to="{ name: 'money-charts-page' }">
+                    Money Chart
+                </router-link>
             </nav>
             <div class="btn btn-outline-primary">
                 <span>Cart({{ inCart.length }})</span>
