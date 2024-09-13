@@ -115,13 +115,15 @@
             },
             monthNumbers() {
                 const values = [];
-                for (let i = 1; i <= 12; i++) {
+                for (let i = 0; i <= 12; i++) {
                     values.push(i);
                 }
                 return values;
             },
             formattedNeedTime() {
-                return 'You need ' + this.needTime + ' Months';
+                const years = Math.floor(this.needTime / 12);
+                const months = this.needTime - years * 12;
+                return 'You need ' + years + ' years and ' + months + ' months';
             }
         }
     }
