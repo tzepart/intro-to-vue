@@ -13,11 +13,103 @@
                 <button type="button" class="btn btn-info" @click="reset">RESET</button>
             </div>
         </div>
+        <div class="row highlights-item">
+            <fusioncharts
+                    :type="type"
+                    :width="width"
+                    :height="height"
+                    :dataFormat="dataFormat"
+                    :dataSource="dataSource"
+            >
+            </fusioncharts>
+        </div>
     </div>
 </template>
 
 <script>
     import VueApexCharts from 'vue-apexcharts'
+
+    const dataSource = {
+        chart: {
+            caption: "Микросервисы, 2017",
+            subcaption:
+                "Click on the segments to Drill-down for ...",
+            showplotborder: "2",
+            theme: "umber"
+        },
+        data: [
+            {
+                id: "999",
+                parent: "",
+                name: "Микросервисы",
+                value: 40,
+                toolText: "This book about...."
+            },
+            {
+                id: "1",
+                parent: "999",
+                name: "Глава 1. Побег из монолитного ада",
+                value: 20,
+            },
+            {
+                id: "3",
+                parent: "1",
+                name: "Глава 1.1",
+                value: 15,
+            },
+            {
+                id: "7",
+                parent: "3",
+                name: "Глава 1.1.1",
+                value: 8,
+            },
+            {
+                id: "8",
+                parent: "3",
+                name: "Глава 1.1.2",
+                value: 7,
+            },
+            {
+                id: "4",
+                parent: "1",
+                name: "Глава 1.2",
+                value: 5,
+            },
+            {
+                id: "2",
+                parent: "999",
+                name: "1.1. Медленным шагом в монолитный ад",
+                value: 20,
+            },
+            {
+                id: "5",
+                parent: "2",
+                name: "Глава 2.1",
+                value: 5,
+            },
+            {
+                id: "6",
+                parent: "2",
+                name: "Глава 2.2",
+                value: 15,
+            },
+        ],
+        styles: {
+            definition: [
+                {
+                    name: "myHTMLFont",
+                    type: "font",
+                    ishtml: "1"
+                }
+            ],
+            application: [
+                {
+                    toobject: "TOOLTIP",
+                    styles: "myHTMLFont"
+                }
+            ]
+        }
+    };
 
     export default {
         name: 'Chart',
@@ -26,6 +118,24 @@
         },
         data() {
             return {
+                type: "sunburst",
+                width: "100%",
+                height: "100%",
+                dataFormat: "json",
+                dataSource,
+                events: {
+                    dataPlotClick: function(ev, props) {
+                        console.log(ev, props);
+                    },
+                    dataPlotRollOver: function(e) {
+                        console.log(e);
+                    },
+                    dataPlotRollOut: function(e) {
+                        console.log(e);
+                    }
+                },
+
+
                 series: [44, 55, 13, 33],
                 chartOptions: {
                     chart: {
@@ -54,6 +164,7 @@
                 },
             }
         },
+
         methods: {
             appendData: function () {
                 var arr = this.series.slice();
@@ -81,5 +192,9 @@
     }
 </script>
 <style scoped>
-
+    .highlights-item {
+        min-height: 500px;
+        max-height: 700px;
+        background-color: #FFFFFF;
+    }
 </style>
